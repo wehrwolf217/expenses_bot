@@ -21,7 +21,7 @@ reciepts_list = ["зарплата", 'левак', 'родители']
 
 # простая заглушка чтоб обрабатывать сообщения только от конкретного пользователя(либо несколько пользователей
 # message.from_user.id not in some_data
-@bot.message_handler(func=lambda message: int(message.from_user.id) != 269368228)
+@bot.message_handler(func=lambda message: int(message.from_user.id) != впишите свой id)
 def some(message):
     bot.send_message(message.chat.id, 'ты не мой создатель, отвали!')
 
