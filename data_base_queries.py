@@ -22,9 +22,9 @@ def insert(table: str, column_values: tuple):
     #         print("Соединение с SQLite закрыто")
 
 
-def output_data(date_month: str):
+def output_data(date: str):
     try:
-        cursor.execute(f'''SELECT * FROM expenses WHERE date LIKE "{date_month}"''')
+        cursor.execute(f'''SELECT * FROM expenses WHERE date LIKE "{date}"''')
         result = cursor.fetchall()
         all_expenses = 0
         food_expenses = 0
@@ -44,7 +44,7 @@ def output_data(date_month: str):
                 etc_expenses += row[1]
             elif row[2] == 'комуналка':
                 stable_expenses += row[1]
-        cursor.execute(f'''SELECT * FROM receipts WHERE date LIKE "{date_month}"''')
+        cursor.execute(f'''SELECT * FROM receipts WHERE date LIKE "{date}"''')
         result = cursor.fetchall()
         salary = 0
         hackwork = 0
@@ -58,7 +58,11 @@ def output_data(date_month: str):
                 hackwork += row[1]
             elif row[2] == 'родители':
                 parents += row[1]
-        return f'затраты за текущий месяц:\nеда: {food_expenses}\nпроезд: {transport_expenses}\nсигареты: {sigaret_expenses}\n' \
+        if len(date) <= 8:
+            month_day = 'месяц'
+        else:
+            month_day = 'день'
+        return f'затраты за текущий {month_day}:\nеда: {food_expenses}\nпроезд: {transport_expenses}\nсигареты: {sigaret_expenses}\n' \
                f'прочее: {etc_expenses}\nкомуналка: {stable_expenses}\n' \
                f'итого потрачено в текущем месяце: {all_expenses}\n\nдоходы за текущий месяц:\nзарплата: {salary}\n' \
                f'левак: {hackwork}\nродители: {parents}\nитого доход:{total_money}\nкуда мы летим: {total_money - all_expenses}'
