@@ -21,7 +21,7 @@ reciepts_list = ["зарплата", 'левак', 'родители']
 
 # простая заглушка чтоб обрабатывать сообщения только от конкретного пользователя(либо несколько пользователей
 # message.from_user.id not in some_data
-@bot.message_handler(func=lambda message: int(message.from_user.id) != впишите свой id)
+@bot.message_handler(func=lambda message: int(message.from_user.id) != 269368228)
 def some(message):
     bot.send_message(message.chat.id, 'ты не мой создатель, отвали!')
 
@@ -33,9 +33,16 @@ def bot_start(message):
                      f'отображения статистики по месяцу')
 
 
-@bot.message_handler(commands=['output'])
+@bot.message_handler(commands=['month_exp'])
 def output(message):
     date = datetime.datetime.now().strftime("%m-%Y")
+    msg = output_data(f'%{date}')
+    bot.send_message(message.chat.id, f'{msg}')
+
+
+@bot.message_handler(commands=['day_exp'])
+def output(message):
+    date = datetime.datetime.now().strftime("%d-%m-%Y")
     msg = output_data(f'%{date}')
     bot.send_message(message.chat.id, f'{msg}')
 
