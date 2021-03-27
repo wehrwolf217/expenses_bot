@@ -64,7 +64,7 @@ def output_data(date: str):
             month_day = 'день'
         return f'затраты за текущий {month_day}:\nеда: {food_expenses}\nпроезд: {transport_expenses}\nсигареты: {sigaret_expenses}\n' \
                f'прочее: {etc_expenses}\nкомуналка: {stable_expenses}\n' \
-               f'итого потрачено в текущем месяце: {all_expenses}\n\nдоходы за текущий месяц:\nзарплата: {salary}\n' \
+               f'итого потрачено за текущий {month_day}: {all_expenses}\n\nдоходы за текущий {month_day}:\nзарплата: {salary}\n' \
                f'левак: {hackwork}\nродители: {parents}\nитого доход:{total_money}\nкуда мы летим: {total_money - all_expenses}'
 
     except sqlite3.Error as error:
